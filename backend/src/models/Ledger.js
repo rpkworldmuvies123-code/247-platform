@@ -1,0 +1,3 @@
+import mongoose from 'mongoose';
+const ledgerSchema = new mongoose.Schema({user:{type:mongoose.Schema.Types.ObjectId,ref:'User',required:true}, type:{type:String,enum:['demo_credit','demo_debit','admin_adjustment'],required:true}, amount:{type:Number,required:true}, note:{type:String,default:''}, balanceAfter:{type:Number,required:true}},{timestamps:true});
+export default mongoose.model('Ledger',ledgerSchema);
