@@ -1,0 +1,4 @@
+import 'dotenv/config';import mongoose from 'mongoose';import bcrypt from 'bcryptjs';import User from './models/User.js';
+if(!process.env.MONGODB_URI||!process.env.JWT_SECRET)throw new Error('Set MONGODB_URI and JWT_SECRET in .env');
+await mongoose.connect(process.env.MONGODB_URI);const email=process.env.ADMIN_EMAIL||'admin@example.com';const password=process.env.ADMIN_PASSWORD;if(!password)throw new Error('Set ADMIN_PASSWORD in .env');
+let admin=await User.findOne({email});if(!admin){admin=await User.create({name:process.env.ADMIN_NAME||'Platform Admin',email,passwordHash:await bcrypt.hash(password,12),role:'admin',active:true});console.log(`Admin created: ${email}`);}else console.log(`Admin already exists: ${email}`);console.log('Change the seeded password before production use.');await mongoose.disconnect();
