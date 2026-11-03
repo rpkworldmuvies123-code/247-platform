@@ -1,0 +1,1 @@
+import {Router} from 'express';import {getFixtures} from '../services/sports.js';const router=Router();router.get('/fixtures',async(req,res)=>{try{res.json(await getFixtures());}catch(e){res.status(502).json({message:'Unable to retrieve sports feed',detail:e.message});}});export default router;
