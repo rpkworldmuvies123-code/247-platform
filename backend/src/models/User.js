@@ -1,0 +1,3 @@
+import mongoose from 'mongoose';
+const userSchema = new mongoose.Schema({clientCode:{type:String,unique:true,sparse:true,index:true},name:{type:String,required:true,trim:true},email:{type:String,lowercase:true,trim:true,sparse:true,unique:true},phone:{type:String,trim:true,default:''},address:{type:String,default:'India'},passwordHash:{type:String,required:true},role:{type:String,enum:['admin','client'],default:'client'},active:{type:Boolean,default:true},rateDifference:{type:Number,default:0.05},demoCredits:{type:Number,default:1000},joinedAt:{type:Date,default:Date.now}},{timestamps:true});
+export default mongoose.model('User',userSchema);
